@@ -1,0 +1,55 @@
+@startuml
+
+class Personnage{
+    #m_nom : String
+    +«create»Personnage(nom: String)
+    +«create»Personnage(nom: String, Boisson boisson)
+    +dire(text: String):
+    +sePresenter():
+    +boire():
+    +boire(Boisson boisson):
+}
+
+class Cowboy extends Personnage{
+
+}
+
+class Brigand extends Personnage{
+
+}
+
+class Dame extends Personnage{
+
+}
+
+
+class Boisson{
+    -m_nom : String
+    +«create»Boisson(nom: string, Genre: genre)
+    +toString(): String
+    +getArticleDefEtNom(): String
+    +getArticleIndefEtNom(): String
+    +getArticlePartiEtNom(): String
+    +getPrepoEtNom(): String
+
+}
+
+package grammaire {
+    enum Genre{
+        -m_articleDefini: String
+        -m_articleIndefini: String
+        -m_articlePartitif: String
+        -«create»Genre(defini: String, Indefini: String, partitif: String)
+        FEMININ
+        MASCULIN
+        +getArticleDef(): String
+        +getArticleIndef(): String
+        +getArticleParti(): String
+        +getPrepo(): String
+    }
+}
+
+Boisson "0..*" *---> "-m_genre\n1" Genre : Est 
+
+Personnage "0..*" *---> "-m_boissonFav\n1" Boisson : adore
+@enduml
