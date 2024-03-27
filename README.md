@@ -82,12 +82,6 @@ Le cowboy peut également capturer un brigand. Il touche alors la récompense of
 Lorsqu’il délivre une dame captive, il dit `« Voilà <pseudo de la dame>, tu es libre maintenant ! »`.
 Le cowboy est caractérisé par le montant total des récompenses qu’il a touchées pour ses captures.
 
-En plus de ces 3 types de personnages, nos histoires peuvent comporter un *narrateur*.  
-Un **narrateur** est un personnage particulier dont le rôle est d’introduire et de commenter les dialogues de l’histoire.
-Lorsqu’un narrateur parle, son texte est affiché tel quel, sans le préfixe indiquant le nom du personnage qui parle.
-Demander à un narrateur de boire autre chose que de l'eau doit provoquer une erreur,
-car après un verre de whisky il pourrait bien se mettre à raconter n'importe quoi.
-Le pseudonyme d'un narrateur est toujours `"<nom du narrateur>, le narrateur"`.
 
 
 #### Questions:

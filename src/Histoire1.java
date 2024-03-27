@@ -9,24 +9,29 @@ package western1;
 //
 //
 
-import western1.grammaire.Genre;
+import western1.grammaire.Feminin;
+import western1.grammaire.Masculin;
+import western2.Narrateur;
 
 public class Histoire1
 {
     public static void main(String[] args)
     {
         Personnage max = new Personnage("Max");
-        Personnage kid = new Personnage("The Kid", new Boisson("thé à la menthe", Genre.MASCULIN));
-        Personnage bill = new Personnage("Bill", new Boisson("whisky", Genre.MASCULIN));
+        Personnage kid = new Personnage("The Kid", new Boisson("thé à la menthe", new Masculin()));
+        Personnage bill = new Personnage("Bill", new Boisson("whisky", new Masculin()));
+        Narrateur homere = new Narrateur();
 
-        max.sePresenter();
-        max.boire();
-        max.dire("Bon, au boulot, maintenant !");
+        homere.ajouterLignes(max.sePresenter());
+        homere.ajouterLignes(max.boire());
+        homere.ajouterLignes(max.dire("Bon, au boulot, maintenant !"));
 
-        kid.sePresenter();
-        kid.boire();
+        homere.ajouterLignes(kid.sePresenter());
+        homere.ajouterLignes(kid.boire());
 
-        bill.sePresenter();
-        bill.boire(new Boisson("eau", Genre.FEMININ));
+        homere.ajouterLignes(bill.sePresenter());
+        homere.ajouterLignes(bill.boire(new Boisson("eau", new Feminin())));
+
+        homere.raconterHistoire();
     }
 }
