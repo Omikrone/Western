@@ -1,10 +1,9 @@
 package western1;
-<<<<<<< HEAD
 import western1.grammaire.*;
 
 public class Personnage {
     protected String m_nom;
-    Boisson m_boissonFav = new Boisson("eau", grammaire.Feminin);
+    Boisson m_boissonFav = new Boisson("eau", new Feminin());
     public Personnage(String nom, Boisson boissonFav) {
         m_nom = nom;
         m_boissonFav = boissonFav;
@@ -19,19 +18,23 @@ public class Personnage {
     }
 
     public String sePresenter() {
-        String def = m_boissonFav.getArticleDefEtNom();
-        return  m_nom + " - Bonjour, je suis " + m_nom + " et j'aime " + def;
-    }
-
-    public String boire(Boisson boisson) {
-        String part_b  = boisson.getArticlePartiEtNom();
-        String part_fav = m_boissonFav.getArticlePartiEtNom();
-
-        return  " GLOUPS ! Faut vraiment avoir soif pour boire " + part_b + "! J’aurais préféré boire "+ part_fav +  "!";
+        String def = m_boissonFav.getNomAvecArticleDefini();
+        return  m_nom + " - Bonjour, je suis " + m_nom + " et j'aime " + def + '.';
     }
 
     public String boire() {
-        String part_fav = m_boissonFav.getArticlePartiEtNom();
-        return "Ah ! boire " + part_fav + " GLOUPS !";
+        String part_b  = m_boissonFav.getNomAvecArticlePartitif();
+        String part_fav = m_boissonFav.getNomAvecArticlePartitif();
+
+        return  m_nom + " - Ah ! boire " + part_fav + " ! GLOUPS !";
+    }
+
+    public String boire(Boisson boisson) {
+        String part_fav = m_boissonFav.getNomAvecArticlePartitif();
+        String part_b = boisson.getNomAvecArticlePartitif();
+        if (boisson.equals(m_boissonFav)) {
+            return m_nom + " - " + "Ah ! boire " + part_fav + " ! GLOUPS !";
+        }
+        else return m_nom + " - " + "GLOUPS ! Faut vraiment avoir soif pour boire " + part_b + " ! j'aurais préféré boire "+ part_fav +  ".";
     }
 }

@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import western1.Boisson;
 import western1.grammaire.Feminin;
 import western1.grammaire.Masculin;
+import western2.Narrateur;
 
 import static org.junit.jupiter.api.Assertions.*;
 
