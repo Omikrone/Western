@@ -1,4 +1,5 @@
 package western1;
+<<<<<<< HEAD
 import western1.grammaire.*;
 
 public class Personnage {
