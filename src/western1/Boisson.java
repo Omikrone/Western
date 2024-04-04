@@ -49,4 +49,10 @@ public class Boisson {
                 return false;
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (((Boisson)other).m_nom == m_nom) return true;
+        else return false;
+    }
 }
