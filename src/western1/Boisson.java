@@ -13,22 +13,29 @@ public class Boisson {
         m_genre = genre;
     }
 
-    public String getArticleDefEtNom(){
+    public String getNomAvecArticleDefini(){
         if(estVoyelle(m_nom.charAt(0)))
             return "l'"+m_nom;
         else
             return m_genre.getArticleDef()+" "+m_nom;
     }
 
-    public String getArticleIndefEtNom(){
+    public String getNomAvecArticleIndefini(){
         return m_genre.getArticleIndef()+" "+m_nom;
     }
 
-    public String getArticlePartiEtNom(){
+    public String getNomAvecArticlePartitif(){
         if(estVoyelle(m_nom.charAt(0)))
             return "de l'"+m_nom;
         else
             return m_genre.getArticleParti()+" "+m_nom;
+    }
+
+    public String getNomAvecPreposition(){
+        if(estVoyelle(m_nom.charAt(0)))
+            return "d'"+m_nom;
+        else
+            return "de "+m_nom;
     }
 
     private boolean estVoyelle(char lettre){
