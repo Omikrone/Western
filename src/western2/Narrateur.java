@@ -6,7 +6,7 @@ public class Narrateur {
     }
 
     public void ajouterLignes(String lignes) {
-        m_lignes += lignes;
+        m_lignes += lignes+"\n";
     }
 
     public void raconterHistoire() {
