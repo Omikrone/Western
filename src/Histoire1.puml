@@ -2,13 +2,42 @@
 
 package western2{
     class Narrateur{
-    -m_histoire: String
-    +«create»Narrateur()
-    +ajouterLignes(phrase: String):
-    +raconterHistoire():
-}
+        -m_histoire: String
+        +«create»Narrateur()
+        +ajouterLignes(phrase: String):
+        +raconterHistoire():
+    }
+    
+    class Dame extends Personnage{
+        -m_libre: Boolean
+        +«create»Dame(surnom: String)
+        +getNom(): String
+        #crier(brigrand: Brigand): String
+        #remercier(cowboy: Cowboy): String
+    }
+
+    class Brigand extends Personnage{
+        -m_recompense: Integer
+        +«create»Brigand(nom: String, boissonFav: Boisson)
+        +getNom(): String
+        #estCapturer(cowboy: Cowboy): String
+        +kidnapper(dame: Dame): String
+        #getDameKidnapper(): Dame[*]
+        #estViserPar(cowboy: Cowboy): String
+        +getRecompense(): Integer
+    }
+
+    class Cowboy extends Personnage{
+        -m_argent: Integer
+        +«create»Cowboy(nom: String, boissonFav: Boisson)
+        +tirerSur(brigrand: Brigrand): String
+        +capturer(brigrand: Brigrand): String
+    }
+
+    Brigand "1" o-> "m_dame\n0..*"Dame : kidnappe
 
 }
+
 package western1{
 class Personnage{
     -m_nom : String
@@ -18,6 +47,7 @@ class Personnage{
     +sePresenter(): String
     +boire(): String
     +boire(boisson: Boisson): String
+    +getNom(): String
 }
 
 class Boisson{
