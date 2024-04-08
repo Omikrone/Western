@@ -15,12 +15,12 @@ public class Dame extends Personnage{
         return "Miss "+m_nom;
     }
 
-    protected String crier(Brigand brigand){
+    String crier(Brigand brigand){
         m_libre = false;
         return m_nom+" - Hiiii ! Au secours ! "+brigand.getNom()+" m’enlève !";
     }
 
-    protected String remercier(Cowboy cowboy){
+    String remercier(Cowboy cowboy){
         m_libre = true;
         return m_nom+" - Merci "+cowboy.getNom()+", tu es mon sauveur !";
     }
