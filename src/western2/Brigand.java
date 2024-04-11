@@ -25,11 +25,11 @@ public class Brigand extends Personnage{
     public String kidnapper(Dame dame){
         m_recompense += 50;
         m_dameKidnapper.add(dame);
-        return dame.crier(this)+"\n"+m_nom+" - Ah, ah ! "+dame.getNom()+" , tu es mienne désormais !";
+        return dame.crier(this)+"\n"+m_nom+" - Ah ah ! "+dame.getNom()+" tu es mienne désormais.";
     }
 
     String estCapturer(Cowboy cowboy){
-        return  m_nom+" - Damned, je suis fait ! Tu m'as eu, "+cowboy.getNom()+" ! Mais tu n'emporteras pas les "+m_recompense+" $ au paradis.";
+        return  m_nom+" - Damned, je suis fait ! "+cowboy.getNom()+", tu m'as eu ! Tu n'emporteras pas les "+m_recompense+"$ au paradis.";
     }
 
     /*
@@ -46,7 +46,7 @@ public class Brigand extends Personnage{
     }
 
     String estViserPar(Cowboy cowboy){
-        return m_nom+" - Tu n’es qu’un coyote, "+cowboy.getNom()+" !";
+        return m_nom+" - Tu n'es qu'un coyote, "+cowboy.getNom()+" !";
     }
 
     public int getRecompense(){

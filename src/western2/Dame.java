@@ -17,12 +17,12 @@ public class Dame extends Personnage{
 
     String crier(Brigand brigand){
         m_libre = false;
-        return m_nom+" - Hiiii ! Au secours ! "+brigand.getNom()+" m’enlève !";
+        return m_nom+" - Hiiii ! Au secours ! "+brigand.getNom()+" m'enlève !";
     }
 
     String remercier(Cowboy cowboy){
         m_libre = true;
-        return m_nom+" - Merci "+cowboy.getNom()+", tu es mon sauveur !";
+        return m_nom+" - Merci "+cowboy.getNom()+" de m'avoir libérée.";
     }
 
 

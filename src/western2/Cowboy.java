@@ -12,7 +12,7 @@ public class Cowboy extends Personnage{
     }
 
     public String tirerSur(Brigand brigand){
-        return m_nom+" - PAN ! PAN ! Prends ça, chacal de "+brigand.getNom()+" !\n"+brigand.estViserPar(this);
+        return m_nom+" - PAN ! PAN ! Prend ça, chacal de "+brigand.getNom()+" !\n"+brigand.estViserPar(this);
     }
 
     public String capturer(Brigand brigand){
