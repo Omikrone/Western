@@ -5,14 +5,18 @@ import western1.Personnage;
 import java.util.ArrayList;
 
 import western1.Boisson;
+import western2.Cowboy;
+import western2.Dame;
 
 public class Brigand extends Personnage{
-    
+    private Boolean estLibre;
+    private String m_auteurCapture;
     private int m_recompense;
     private ArrayList<Dame> m_dameKidnapper;
 
     public Brigand(String nom, Boisson boissonFav){
         super(nom, boissonFav);
+        estLibre = true;
         m_dameKidnapper = new ArrayList<Dame>();
         m_recompense = 100;
     }
@@ -22,6 +26,22 @@ public class Brigand extends Personnage{
         return m_nom+" le méchant";
     }
 
+    public String sePresenter() {
+        String presentation = super.sePresenter();
+        presentation += " Ma tête est mise à prix " + m_recompense + "$ !";
+        if (estLibre && m_dameKidnapper.size()>0) {
+            presentation += " Je suis libre et en bonne compagnie avec ";
+            for (int i=0; i<m_dameKidnapper.size(); i++) {
+                if (i!=0) presentation += ", ";
+                presentation += m_dameKidnapper.get(i).getNom();
+            }
+            presentation += ".";
+        }
+        else if (estLibre && m_dameKidnapper.size()==0) presentation += " Je suis libre.";
+        else presentation += " Je suis le prisonnier de " + m_auteurCapture + ".";
+        return presentation;
+    }
+
     public String kidnapper(Dame dame){
         m_recompense += 50;
         m_dameKidnapper.add(dame);
@@ -29,6 +49,8 @@ public class Brigand extends Personnage{
     }
 
     String estCapturer(Cowboy cowboy){
+        estLibre = false;
+        m_auteurCapture = cowboy.getNom();
         return  m_nom+" - Damned, je suis fait ! "+cowboy.getNom()+", tu m'as eu ! Tu n'emporteras pas les "+m_recompense+"$ au paradis.";
     }
 
