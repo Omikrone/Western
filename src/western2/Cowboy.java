@@ -41,9 +41,9 @@ public class Cowboy extends Personnage{
     public String capturer(Brigand brigand){
         m_argent += brigand.getRecompense();
         m_brigandCapturer.add(brigand.getNom());
-        String brigandString = brigand.estCapturer(this.getNom());
+        String nomDame = brigand.getNameDame();
         String remercimentDame = brigand.getRemerciment(this.getNom());
-        return brigandString+"\n"+m_nom+" - Voilà "+brigand.getNameDame()+"tu es libre maintenant !\n"+remercimentDame;
+        return brigand.estCapturer(this.getNom())+"\n"+m_nom+" - Voilà "+nomDame+"tu es libre maintenant !\n"+remercimentDame;
     }
 
     public static void setBoissonDef(Boisson boisson){
