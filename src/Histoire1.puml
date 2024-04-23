@@ -63,36 +63,48 @@ package western2{
     
     class Dame extends Personnage{
         -m_libre: Boolean
-        +«create»Dame(surnom: String)
+        -m_loic: String
+        -m_sauveur: String
+        +«create»Dame(nom: String)
+        +«create»Dame(nom: String, boisson: Boisson)
         +sePresenter():String
         +getNom(): String
-        #crier(brigrand: Brigand): String
-        #remercier(cowboy: Cowboy): String
+        ~crier(brigrand: String): String
+        ~remercier(cowboy: String): String
+        +{static} setBoissonDef(boisson: Boisson):
     }
 
     class Brigand extends Personnage{
         -m_recompense: Integer
+        -m_estLibre: Boolean
+        -m_auteurCapture: String
         +«create»Brigand(nom: String, boissonFav: Boisson)
+        +«create»Brigand(nom: String)
         +sePresenter():String
         +getNom(): String
-        #estCapturer(cowboy: Cowboy): String
+        ~getNameDame(): String
+        ~getRemercimentDame(nomCoboy: String): String
+        ~estCapturer(cowboy: String): String
         +kidnapper(dame: Dame): String
-        #getDameKidnapper(): Dame[*]
-        #estViserPar(cowboy: Cowboy): String
+        ~estViserPar(cowboy: String): String
         +getRecompense(): Integer
+        +{static}setBoissonDef(boisson: Boisson):
     }
 
     class Cowboy extends Personnage{
         -m_argent: Integer
+        -m_brigandCapturer: String[0..*]
         +sePresenter():String
+        +«create»Cowboy(nom:String)
         +«create»Cowboy(nom: String, boissonFav: Boisson)
         +tirerSur(brigrand: Brigrand): String
         +capturer(brigrand: Brigrand): String
+        +setBoissonDef(boisson: Boisson):
     }
 
     Brigand "1" o-> "m_dame\n0..*"Dame : kidnappe
-    Dame "1" o-> "m_loic\n0..*"Brigand : est kidnapper par
-    Dame "1" o-> "m_sauveur\n0,1"Cowboy : est sauver pas
-
+    Brigand "0..*" *-> "{static}m_boissonDef\n1"Boisson: boisson par defaut
+    Cowboy "0..*" *-> "{static}m_boissonDef\n1"Boisson: boisson par defaut
+    Dame "0..*" *-> "{static}m_boissonDef\n1"Boisson: boisson par defaut
 }
 @enduml

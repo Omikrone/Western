@@ -1,22 +1,29 @@
 package western2;
 
 import western1.Personnage;
+import western1.grammaire.Feminin;
 
 import java.util.ArrayList;
 
 import western1.Boisson;
-import western2.Cowboy;
-import western2.Dame;
 
 public class Brigand extends Personnage{
-    private Boolean estLibre;
+    private Boolean m_estLibre;
     private String m_auteurCapture;
     private int m_recompense;
     private ArrayList<Dame> m_dameKidnapper;
+    private static Boisson m_boissonDef = new Boisson("eau", new Feminin());
 
     public Brigand(String nom, Boisson boissonFav){
         super(nom, boissonFav);
-        estLibre = true;
+        m_estLibre = true;
+        m_dameKidnapper = new ArrayList<Dame>();
+        m_recompense = 100;
+    }
+
+    public Brigand(String nom){
+        super(nom, m_boissonDef);
+        m_estLibre = true;
         m_dameKidnapper = new ArrayList<Dame>();
         m_recompense = 100;
     }
@@ -26,52 +33,62 @@ public class Brigand extends Personnage{
         return m_nom+" le méchant";
     }
 
+    String getNameDame(){ 
+        String listeDame = "";
+        for(Dame dame : m_dameKidnapper){
+            listeDame += dame.getNom()+", ";
+        }
+        return listeDame;
+    }
+
+    String getRemerciment(String nomCoboy){
+        String remerciment = "";
+        for(Dame dame : m_dameKidnapper){
+            remerciment += dame.remercier(nomCoboy);
+        }
+        return remerciment;
+    }
+
     public String sePresenter() {
         String presentation = super.sePresenter();
         presentation += " Ma tête est mise à prix " + m_recompense + "$ !";
-        if (estLibre && m_dameKidnapper.size()>0) {
+
+        if (m_dameKidnapper.size()>0) {
             presentation += " Je suis libre et en bonne compagnie avec ";
-            for (int i=0; i<m_dameKidnapper.size(); i++) {
-                if (i!=0) presentation += ", ";
-                presentation += m_dameKidnapper.get(i).getNom();
-            }
-            presentation += ".";
+            presentation += getNameDame();
+            presentation = presentation.substring(0,presentation.length()-2) + ".";
         }
-        else if (estLibre && m_dameKidnapper.size()==0) presentation += " Je suis libre.";
-        else presentation += " Je suis le prisonnier de " + m_auteurCapture + ".";
+        else if (m_estLibre){
+            presentation += " Je suis libre.";
+        }
+        else{
+            presentation += " Je suis le prisonnier de " + m_auteurCapture + ".";
+        }
         return presentation;
     }
 
     public String kidnapper(Dame dame){
         m_recompense += 50;
         m_dameKidnapper.add(dame);
-        return dame.crier(this)+"\n"+m_nom+" - Ah ah ! "+dame.getNom()+" tu es mienne désormais.";
+        return dame.crier(this.getNom())+"\n"+m_nom+" - Ah ah ! "+dame.getNom()+" tu es mienne désormais.";
     }
 
-    String estCapturer(Cowboy cowboy){
-        estLibre = false;
-        m_auteurCapture = cowboy.getNom();
-        return  m_nom+" - Damned, je suis fait ! "+cowboy.getNom()+", tu m'as eu ! Tu n'emporteras pas les "+m_recompense+"$ au paradis.";
-    }
-
-    /*
-     * permet d'avoir un copie de la liste des dames kinaper par un brigrand
-     * Attention la liste du brigand est vidé par cette fonction
-     */
-    ArrayList<Dame> getDameKidnapper(){
-        ArrayList<Dame> listDame = new ArrayList<Dame>();
-        for(Dame dame : m_dameKidnapper){
-            listDame.add(dame);
-        }
+    String estCapturer(String cowboy){
+        m_estLibre = false;
+        m_auteurCapture = cowboy;
         m_dameKidnapper.clear();
-        return listDame;
+        return  m_nom+" - Damned, je suis fait ! "+cowboy+", tu m'as eu ! Tu n'emporteras pas les "+m_recompense+"$ au paradis.";
     }
 
-    String estViserPar(Cowboy cowboy){
-        return m_nom+" - Tu n'es qu'un coyote, "+cowboy.getNom()+" !";
+    String estViserPar(String cowboy){
+        return m_nom+" - Tu n'es qu'un coyote, "+cowboy+" !";
     }
 
     public int getRecompense(){
         return m_recompense;
+    }
+
+    public static void setBoissonDef(Boisson boisson){
+        m_boissonDef = boisson;
     }
 }

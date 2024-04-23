@@ -1,4 +1,4 @@
-package western1;
+//package western1;
 
 //  @ Project : Western
 //  @ File Name : Histoire1.java
@@ -9,8 +9,8 @@ package western1;
 //
 //
 
-import western1.grammaire.Feminin;
-import western1.grammaire.Masculin;
+import western1.*;
+import western1.grammaire.*;
 import western2.Narrateur;
 
 public class Histoire1
