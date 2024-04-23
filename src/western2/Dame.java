@@ -1,11 +1,12 @@
 package western2;
 
+import western1.Boisson;
 import western1.Personnage;
 
 public class Dame extends Personnage{
     private boolean m_libre;
-    private Brigand loic; // c'est le méchant de l'histoire
-    private Cowboy sauveur;
+    private String m_loic; // c'est le méchant de l'histoire
+    private String m_sauveur;
 
     public Dame (String surnom) {
         super(surnom);
@@ -31,19 +32,17 @@ public class Dame extends Personnage{
         return "Miss "+m_nom;
     }
 
-    String crier(Brigand brigand){
+    String crier(String brigand){
         m_libre = false;
-        loic = brigand;
-        return m_nom+" - Hiiii ! Au secours ! "+brigand.getNom()+" m'enlève !";
+        m_loic = brigand;
+        return m_nom+" - Hiiii ! Au secours ! "+brigand+" m'enlève !";
     }
 
-    String remercier(Cowboy cowboy){
+    String remercier(String cowboy){
         m_libre = true;
-        sauveur = cowboy;
-        return m_nom+" - Merci "+cowboy.getNom()+" de m'avoir libérée.";
+        m_sauveur = cowboy;
+        return m_nom+" - Merci "+cowboy+" de m'avoir libérée.";
     }
-
-
 }
 
    
