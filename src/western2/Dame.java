@@ -9,7 +9,7 @@ public class Dame extends Personnage{
     private boolean m_libre;
     private String m_loic; // c'est le méchant de l'histoire
     private String m_sauveur;
-    private static Boisson m_boissonDef = new Boisson("eau", new Feminin());
+    private static Boisson m_boissonDef = new Boisson("eau",new Feminin());
 
     public Dame (String nom) {
         super(nom, m_boissonDef);
