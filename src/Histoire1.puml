@@ -1,5 +1,58 @@
 @startuml
 
+package western1{
+    class Personnage{
+        -m_nom : String
+        +«create»Personnage(nom: String)
+        +«create»Personnage(nom: String, Boisson boisson)
+        +dire(phrase: String): String
+        +sePresenter(): String
+        +boire(): String
+        +boire(boisson: Boisson): String
+        +getNom(): String
+    }
+
+    class Boisson{
+        -m_nom : String
+        +«create»Boisson(nom: string, Genre: genre)
+        +getNomAvecArticleDefini(): String
+        +getNomAvecArticleIndefini(): String
+        +getNomAvecArticlePartitif(): String
+        +getNomAvecPreposition(): String
+        -estVoyelle(lettre: String): boolean
+        }
+
+    package grammaire {
+        class Masculin extends Genre{
+            -m_articleDef: String
+            -m_articleIndef: String
+            -m_articleParti: String
+            +«create»Masculin()
+            +getArticleDef(): String
+            +getArticleIndef(): String
+            +getArticleParti(): String
+        }
+        class Feminin extends Genre{
+            -m_articleDef: String
+            -m_articleIndef: String
+            -m_articleParti: String
+            +«create»Feminin()
+            +getArticleDef(): String
+            +getArticleIndef(): String
+            +getArticleParti(): String
+        }
+
+        interface Genre{
+            getArticleDef(): String
+            getArticleIndef(): String
+            getArticleParti(): String
+        }
+    }
+    Boisson "0..*" *---> "-m_genre\n1" Genre : Est 
+
+    Personnage "0..*" *---> "-m_boissonFav\n1" Boisson : adore
+}
+
 package western2{
     class Narrateur{
         -m_histoire: String
@@ -11,6 +64,7 @@ package western2{
     class Dame extends Personnage{
         -m_libre: Boolean
         +«create»Dame(surnom: String)
+        +sePresenter():String
         +getNom(): String
         #crier(brigrand: Brigand): String
         #remercier(cowboy: Cowboy): String
@@ -19,6 +73,7 @@ package western2{
     class Brigand extends Personnage{
         -m_recompense: Integer
         +«create»Brigand(nom: String, boissonFav: Boisson)
+        +sePresenter():String
         +getNom(): String
         #estCapturer(cowboy: Cowboy): String
         +kidnapper(dame: Dame): String
@@ -29,65 +84,15 @@ package western2{
 
     class Cowboy extends Personnage{
         -m_argent: Integer
+        +sePresenter():String
         +«create»Cowboy(nom: String, boissonFav: Boisson)
         +tirerSur(brigrand: Brigrand): String
         +capturer(brigrand: Brigrand): String
     }
 
     Brigand "1" o-> "m_dame\n0..*"Dame : kidnappe
+    Dame "1" o-> "m_loic\n0..*"Brigand : est kidnapper par
+    Dame "1" o-> "m_sauveur\n0,1"Cowboy : est sauver pas
 
 }
-
-package western1{
-class Personnage{
-    -m_nom : String
-    +«create»Personnage(nom: String)
-    +«create»Personnage(nom: String, Boisson boisson)
-    +dire(phrase: String): String
-    +sePresenter(): String
-    +boire(): String
-    +boire(boisson: Boisson): String
-    +getNom(): String
-}
-
-class Boisson{
-    -m_nom : String
-    +«create»Boisson(nom: string, Genre: genre)
-    +getNomAvecArticleDefini(): String
-    +getNomAvecArticleIndefini(): String
-    +getNomAvecArticlePartitif(): String
-    +getNomAvecPreposition(): String
-    -estVoyelle(lettre: String): boolean
-}
-
-package grammaire {
-    class Masculin extends Genre{
-        -m_articleDef: String
-        -m_articleIndef: String
-        -m_articleParti: String
-        +«create»Masculin()
-        +getArticleDef(): String
-        +getArticleIndef(): String
-        +getArticleParti(): String
-    }
-    class Feminin extends Genre{
-        -m_articleDef: String
-        -m_articleIndef: String
-        -m_articleParti: String
-        +«create»Feminin()
-        +getArticleDef(): String
-        +getArticleIndef(): String
-        +getArticleParti(): String
-    }
-
-    interface Genre{
-        getArticleDef(): String
-        getArticleIndef(): String
-        getArticleParti(): String
-    }
-}
-}
-Boisson "0..*" *---> "-m_genre\n1" Genre : Est 
-
-Personnage "0..*" *---> "-m_boissonFav\n1" Boisson : adore
 @enduml
